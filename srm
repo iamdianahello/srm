@@ -34,4 +34,4 @@ echo "new path is: $newpath"
 mv $oldpath $newpath #работает и с относительным и с абсолютным путем
 
 #ага. Теперь как-то надо чистить старые файлы в ресайкле
-find $recycledir/* -cmin +3 -delete
+find $recycledir/* -ctime +7 -delete
