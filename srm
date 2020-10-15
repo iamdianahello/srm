@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ -n "$1" ]
+then
+file=$1
+else
+echo "а где собсна файл?"
+exit $?
+fi
+
+
+#заархивируем файл
+gzip $file
+filegz=$file.gz #дальше имеем дело с архивом вместо файла
+
+recycledir=~/RECYCLE
+
+if [ ! -d "$recycledir" ]; then
+    mkdir $recycledir
+fi
+
+
+
+filenamegz="${filegz##*/}" #извлекаем имя уже архивированного файла, работает и с относительным и с абсолютным
+echo "вытащили имя файла: $filenamegz"
+
+
+oldpath="$filegz"
+newpath="$recycledir/$filenamegz"
+
+echo "old path is: $oldpath"
+echo "new path is: $newpath"
+
+mv $oldpath $newpath #работает и с относительным и с абсолютным путем
+
+#ага. Теперь как-то надо чистить старые файлы в ресайкле
+find $recycledir/* -cmin +3 -delete
