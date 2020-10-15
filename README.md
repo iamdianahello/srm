@@ -1,5 +1,6 @@
 ## Safe remover
 for os: linux
+
 Run script as bash command. Enter filename as argument.
 That file will be archived and moved to ~/RECYCLE directory.
 
